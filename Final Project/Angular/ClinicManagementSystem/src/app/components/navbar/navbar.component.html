@@ -1,0 +1,27 @@
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" style="background-color:rgb(15, 8, 39)">
+  <div class="col-md-3 mb-2 mb-md-0">
+    <a href="/" class="d-inline-flex text-decoration-none text-white mx-3"  style="font-size: 19px; font-family:Georgia, 'Times New Roman', Times, serif">
+     <b>
+      <i>
+        JATAYU
+      </i>
+     </b> 
+    </a>
+  </div>
+
+  
+  <div class="col-md-3 text-end">
+    <a href="/login" *ngIf="!loggedIn"  class="btn btn-outline-primary btn-sm me-2">Login</a>
+    <a href="/register" *ngIf="!loggedIn" class="btn btn-primary btn-sm" style="margin-right: 15px;">Sign-up</a>
+  </div>
+
+  @if (loggedIn) {
+
+    <div class="col-md-3 text-end">
+      
+      <a *ngIf="loggedIn" (click)="logoutuser()" class="btn btn-outline-danger btn-sm " style="margin-right: 15px;">Log Out</a>
+    </div>
+
+  }
+ 
+</header>

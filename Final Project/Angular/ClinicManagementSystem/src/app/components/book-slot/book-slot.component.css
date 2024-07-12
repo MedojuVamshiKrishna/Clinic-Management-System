@@ -1,0 +1,26 @@
+.table {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.thead-dark {
+  background-color: #343a40;
+  color: white;
+}
+
+.btn {
+  margin: 10px;
+}
+
+.table-bordered th, .table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.align-middle {
+  vertical-align: middle !important;
+}
+
+.booked-slot {
+  color: red;
+  font-weight: bold;
+}

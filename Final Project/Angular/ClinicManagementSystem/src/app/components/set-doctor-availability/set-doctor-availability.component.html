@@ -1,0 +1,30 @@
+<div class="main">
+  <div class="calendar-container container mt-5 shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="padding-top: 7%;">
+    <h3 class="text-center mb-4">Select Dates</h3>
+
+    <div class="calendar-nav d-flex justify-content-between align-items-center mb-3">
+      <button class="btn btn-secondary" (click)="prevMonth()">&lt;</button>
+      <div>{{ months[currentMonth] }} {{ currentYear }}</div>
+      <button class="btn btn-secondary" (click)="nextMonth()">&gt;</button>
+    </div>
+
+    <div class="calendar-grid">
+      <div class="calendar-header">
+        <div *ngFor="let day of weekDays" class="day-header">{{ day }}</div>
+      </div>
+      <div class="calendar-body">
+        <div *ngFor="let day of days" class="day-cell">
+          <div *ngIf="day"
+               class="day"
+               [class.selected]="isSelected(day)"
+               [class.past]="isPastDate(day)"
+               [class.availability]="isAvailabilityDate(day)"
+               (click)="toggleDate(day)">
+            {{ day.getDate() }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary mt-4" (click)="submit()" style="width: 20%; margin-left: 40%;">Submit</button>
+  </div>
+</div>

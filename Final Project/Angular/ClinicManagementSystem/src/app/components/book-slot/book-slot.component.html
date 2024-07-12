@@ -1,0 +1,57 @@
+@if (slotsnotselected === true) {
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p><strong> No slot Selected </strong>please try to select one slot!! </p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+}
+@if (paymentfailed === true) {
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p><strong> Payment failed!!! </strong>Cannot book your slot </p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+}
+
+<div class="container mt-4">
+  <div class="row mb-3 text-center">
+    <div class="col">
+      <button class="btn btn-primary me-2" (click)="previousWeek()">Previous Week</button>
+      <button class="btn btn-primary" (click)="nextWeek()">Next Week</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th class="align-middle">Time Slot</th>
+            <th *ngFor="let day of weekDays" class="align-middle">{{ day | date: 'EEE, MMM d, y' }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let timeSlot of timeSlots">
+            <td class="align-middle">{{ timeSlot }}</td>
+            <td *ngFor="let day of weekDays" class="align-middle">
+              <ng-container *ngIf="bookings[formatDate(day)][timeSlot] !== '--'; else unavailable">
+                <input
+                  type="checkbox"
+                  [checked]="bookings[formatDate(day)][timeSlot]"
+                  [disabled]="bookings[formatDate(day)][timeSlot] === 'booked' || isPastDate(day)"
+                  (change)="toggleBooking(formatDate(day), timeSlot)"
+                />
+                <span *ngIf="bookings[formatDate(day)][timeSlot] === 'booked'" class="text-danger">Booked</span>
+              </ng-container>
+              <ng-template #unavailable>
+                {{ bookings[formatDate(day)][timeSlot] }}
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-success" (click)="payandsubmitBookings()">Pay Now!!</button>
+    </div>
+  </div>
+</div>

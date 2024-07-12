@@ -1,0 +1,188 @@
+.dash {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  margin-top: -25px;
+  height: 100vh; /* Make the dash container take full viewport height */
+}
+
+.sidebar {
+  height: 100%; /* Take full height of the dash container */
+  width: 15vw; /* 15% of the viewport width */
+  background-color: rgb(145, 144, 150); /* Dark background color */
+  padding-top: 20px;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent sidebar from scrolling */
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  display: block;
+  align-items: center; 
+  text-align: center;
+}
+
+.sidebar a:hover {
+  background-color: rgb(121, 126, 127);
+}
+
+.sidebar a.active {
+  background-color: rgb(227, 227, 229);;
+  border-radius: 5px;
+}
+
+.content {
+  width: 85vw; /* 85% of the viewport width */
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in the width calculation */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+}
+.card{
+  padding-bottom: -35px;
+}
+.bar-chart {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.bar-chart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 300px;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+  width: 80%; /* Reduced width of the graph */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex: 1;
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bar-inner {
+  width: 40px; /* Reduced width of the bars */
+  background-color: #4caf50;
+  position: relative;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.bar-inner:hover {
+  background-color: #388e3c;
+}
+
+.bar-label {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.bar-count {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  text-align: center;
+}
+
+.y-axis {
+ 
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.y-label {
+  display: flex;
+  transform: rotate(-90deg);
+  transform-origin: left top 0;
+  margin-top: 220px;
+  margin-left: 10px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.y-ticks {
+  margin-top: -190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.y-tick {
+  width: 20px;
+  text-align: right;
+}
+
+.x-axis {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.x-label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.dash {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  margin-top: -25px;
+}
+
+.sidebar {
+  height: 92.35vh;
+  width: 15vw; /* 15% of the viewport width */
+  top: -25px;
+  left: 0;
+  background-color: rgb(145, 144, 150); /* Dark background color */
+  padding-top: 20px;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  display: block;
+  align-items: center;
+  text-align: center;
+}
+
+.sidebar a:hover {
+  background-color: rgb(121, 126, 127);
+}
+
+.sidebar a.active {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+

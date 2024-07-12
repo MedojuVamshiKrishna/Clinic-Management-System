@@ -1,0 +1,63 @@
+  <!-- {
+    "id": 1,
+    "age": 21,
+    "bp": 80,
+    "doctor": "praveen-general physician",
+    "doctorId": "praveen@gmail.com",
+    "gender": "Male",
+    "name": "dileep reddy",
+    "phone": 7207142778,
+    "spo2": 98,
+    "symptoms": "cold, fever",
+    "temperature": 97,
+    "weight": 80,
+    "date": "2024-07-10",
+    "time": "17:00:00"
+} -->
+<table class="table mx-3 shadow p-3 mb-5 bg-body-tertiary rounded " >
+    <thead>
+      <tr>
+        <th scope="col">S.no</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Weight</th>
+        <th scope="col">BP</th>
+        <th scope="col">SPO2</th>
+        <th scope="col">Temperature</th>
+        <th scope="col">Symptoms</th>
+        <th scope="col">Slot detailes</th>
+        <th scope="col">Actions</th>
+        <th scope="col">Appointed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of patients; let i =index">
+        @if (item.date>=formattedDate) {
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.age}}</td>
+          <td>{{item.weight}}</td>
+          <td>{{item.bp}}</td>
+          <td>{{item.spo2}}</td>
+          <td>{{item.temperature}}</td>
+          <td>{{item.symptoms}}</td>
+          <td>{{item.date}} - {{item.time}}</td>
+          <td>
+            @if (item.appointed===true) {
+              <button type="button" class="btn btn-outline-success" (click)="updateappointment(item)" disabled>Mark as Consulted</button>
+            }
+            @if (item.appointed===false) {
+              <button type="button" class="btn btn-outline-success" (click)="updateappointment(item)" >Mark as Consulted</button>
+            }
+              
+              
+          </td>
+          <td>{{item.appointed}}</td>
+
+        }
+       
+      </tr>
+     
+    </tbody>
+  </table>
+

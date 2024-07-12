@@ -1,0 +1,145 @@
+.container1 {
+    background-color: rgb(27, 9, 105);
+    display: block;
+    margin-top: -30px;
+  }
+  .container1 .left {
+    padding-top: 8%;
+    color: white;
+  }
+  .container1 .right{
+   
+    margin-left: 25%;
+  }
+  .container1 .right img {
+    float: right;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 35%;
+  }
+  .container2 {
+    margin-top: 20%;
+    background-color: white; /* Or any other color you prefer for container2 */
+    display: inline;
+    position: relative;
+  }
+  .container2 h3 {
+    text-align: center;
+    margin-top: 5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .container2 .card {
+    width: 18rem;
+  }
+  .container2 .card-body {
+    padding: 1rem;
+  }
+  .container2 .row {
+    align-items: center;
+    margin-left: 3%;
+  }
+  .card{
+    transition: all 0.3s;
+  }
+  
+  .card:hover{
+    transform: scale(1.15);
+    box-shadow: 2px 2px 2px 2px lightsteelblue;
+  }
+
+
+
+
+
+
+
+  .container3 {
+    background-color: rgb(3, 56, 59);
+    display: block;
+    margin-top: -30px;
+  }
+  .container3 .left {
+    padding-top: 8%;
+    color: white;
+  }
+  .container3 .right{
+   
+    margin-left: 25%;
+  }
+  .container3 .right img {
+    float: right;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 35%;
+  }
+  .container4 {
+    margin-top: 20%;
+    background-color: white; /* Or any other color you prefer for container2 */
+    display: inline;
+    position: relative;
+  }
+  .container4 h3 {
+    text-align: center;
+    margin-top: 5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .container4 .card {
+    width: 18rem;
+  }
+  .container4 .card-body {
+    padding: 1rem;
+  }
+  .container4 .row {
+    align-items: center;
+    margin-left: 3%;
+  }
+
+
+
+
+  
+.dash {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  margin-top: -25px;
+}
+
+.sidebar {
+  height: 92.35vh;
+  width: 15vw;   /* 15% of the viewport width */
+  /* position: fixed;  */
+  top: -25px;
+  left: 0;
+  background-color: rgb(145, 144, 150); /* Dark background color */
+  padding-top: 20px;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  /* font-family:Georgia, 'Times New Roman'; */
+  display: block;
+  align-items: center; 
+  text-align: center;
+}
+
+.sidebar a:hover {
+  background-color: rgb(121, 126, 127);
+  /* border-radius: 50px; */
+}
+
+.sidebar a.active {
+  background-color: #ffffff;
+}
+
+.content {
+  /* margin-left: 15vw; */
+  padding: 20px;
+  
+  /* height: 100vh;  */
+  width: 85vw;   /* 85% of the viewport width */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}

@@ -1,0 +1,80 @@
+.dash {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    margin-top: -25px;
+    height: 100vh; /* Make the dash container take full viewport height */
+  }
+  
+  .sidebar {
+    height: 100%; /* Take full height of the dash container */
+    width: 15vw; /* 15% of the viewport width */
+    background-color: rgb(145, 144, 150); /* Dark background color */
+    padding-top: 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent sidebar from scrolling */
+  }
+  
+  .sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    display: block;
+    align-items: center; 
+    text-align: center;
+  }
+  
+  .sidebar a:hover {
+    background-color: rgb(121, 126, 127);
+  }
+  
+  .sidebar a.active {
+    background-color: rgb(227, 227, 229);;
+    border-radius: 5px;
+  }
+  
+  .content {
+    width: 85vw; /* 85% of the viewport width */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  }
+ 
+  .dash {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    margin-top: -25px;
+  }
+  
+  .sidebar {
+    height: 92.35vh;
+    width: 15vw; /* 15% of the viewport width */
+    top: -25px;
+    left: 0;
+    background-color: rgb(145, 144, 150); /* Dark background color */
+    padding-top: 20px;
+  }
+  
+  .sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    display: block;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .sidebar a:hover {
+    background-color: rgb(121, 126, 127);
+  }
+  
+  .sidebar a.active {
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
+  
+  
+  

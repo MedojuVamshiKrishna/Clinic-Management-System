@@ -1,0 +1,120 @@
+
+<!-- ADMIN dashboard -->
+@if (role==="ADMIN") {
+    
+    <div class="dash">
+       
+        <div class="sidebar">
+            
+          <a href="/dashboard" >
+            <svg   xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+              </svg>
+              <h4 style="font-family: Georgia, 'Times New Roman';" >ADMIN</h4>
+          </a>
+          <a href="/viewPayments" style="font-size: larger;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Payment History</b></a>
+          <a href="/stats" style="font-size: larger;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Statistics</b></a>
+          
+        </div>
+      
+        <div class="content">
+          <h1>Main Content</h1>
+          <p>This is where the main content goes. It occupies the remaining 85% of the viewport width.</p>
+        </div>
+</div>
+}
+
+
+
+<!-- DOCTOR dashboard -->
+@if (role==="DOCTOR") {
+    <div class="container3 " style="padding-bottom: 5%;">
+        <div class="container d-flex ">
+            <div class="left">
+                <h4>Hello Dr. {{name}}</h4>
+                <p>Experience unparalleled security and convenience.</p>
+                <button class="btn btn-secondary ">Learn More</button>
+                
+            </div>
+           
+        </div>
+      </div>
+      
+      <div class="container4 d-block my-1" style="margin-left: 28%;">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-5 ">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View patients</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="/appliedPatients" class="btn btn-outline-dark btn-sm">Book Now!</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Set Your Availability</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="/docavail"  class="btn btn-outline-dark btn-sm">Apply Now!!</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+      </div>
+}
+
+
+<!-- STAFF dashboard -->
+@if (role==="STAFF") {
+    <div class="container1">
+        <div class="container d-flex ">
+            <div class="left">
+                <h4>Welcome to the Jatayu Hospitals</h4>
+                <p>Experience unparalleled security and convenience.</p>
+                <button class="btn btn-secondary ">Learn More</button>
+                
+            </div>
+            <div class="right">
+                <img src="https://us.123rf.com/450wm/denayunebgt/denayunebgt2111/denayunebgt211100099/176947587-hospital-building-for-healthcare-cartoon-background-vector-illustration-with-ambulance-car-doctor.jpg?ver=6" width="100%" height="350" alt="image not available" >
+            </div>
+        </div>
+      </div>
+      
+      <div class="container2 d-block my-1">
+        <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 align-content-center align-items-md-center">
+            <div class="col" style="margin-left: 20px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Book an Appointment</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="/patients" class="btn btn-outline-dark btn-sm">Book Now!</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Register Patient</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="/createpatient"  class="btn btn-outline-dark btn-sm">Register Now!!</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Medical Records</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="/healthrecords"  class="btn btn-outline-dark btn-sm">View Now!!</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+      </div>
+}

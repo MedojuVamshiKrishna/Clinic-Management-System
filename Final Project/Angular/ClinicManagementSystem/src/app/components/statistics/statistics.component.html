@@ -1,0 +1,77 @@
+<div class="dash">
+  <div class="sidebar">
+    <a href="/dashboard">
+      <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+      </svg>
+      <h4 style="font-family: Georgia, 'Times New Roman';">ADMIN</h4>
+    </a>
+    <a href="/viewPayments" style="font-size: larger;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Payment History</b></a>
+    <a href="/stats" style="font-size: larger;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" class="active"><b>Statistics</b></a>
+  </div>
+
+  <div class="content" style="background-color: rgb(227, 227, 229);">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div class="col">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Total Bookings</h5>
+            <p class="display-4" style="text-align: center;">{{bookings}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Patients Registered</h5>
+            <p class="display-4" style="text-align: center;">{{patients}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Total Staff</h5>
+            <p class="display-4" style="text-align: center;">{{staff}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Total Doctors</h5>
+            <p class="display-4" style="text-align: center;">{{doctors}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bar-chart mt-5">
+      <h2>Appointment Statistics</h2>
+      <div class="bar-chart-container">
+        <div class="y-axis">
+          <div class="y-label" id="y-label">Number of Patients</div>
+          <!-- <div class="y-ticks">
+            <div *ngFor="let tick of [5, 4, 3, 2, 1, 0]" class="y-tick">{{tick}}</div>
+          </div> -->
+        </div>
+        <div class="bars">
+          <div *ngFor="let doctor of doctorNames; let i = index" class="bar">
+            <div class="bar-inner" [style.height]="appointmentCounts[i] * 20 + 'px'">
+              <span class="bar-count">{{appointmentCounts[i]}}</span>
+            </div>
+            <div class="bar-label">{{doctor}}</div>
+          </div>
+        </div>
+       
+      </div>
+      <div class="x-axis mt-3">
+        <div class="x-label">Doctor Names</div>
+      </div>
+     
+    </div>
+   
+  </div>
+  
+</div>
+

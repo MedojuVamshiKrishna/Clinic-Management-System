@@ -1,0 +1,73 @@
+
+.main {
+  margin-top: -30px;
+  height: calc(100vh - 40px); /* Adjust height calculation to fit within viewport */
+  background-color: rgb(227, 227, 229);;
+  box-sizing: border-box;
+}
+
+.calendar-container {
+  display: inline-block;
+  align-items: center;
+  margin-top: 25%;
+  margin-left: 12%;
+}
+
+.calendar-nav {
+  width: 100%;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.calendar-header, .calendar-body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.day-header, .day-cell {
+  width: calc(100% / 7);
+  text-align: center;
+  padding: 5px;
+}
+
+.day {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.day:hover {
+  background-color: #f0f0f0;
+}
+
+.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.past {
+  background-color: #a9a9a9; /* Dark grey color for past dates */
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.availability {
+  background-color: darkblue;
+  color: white;
+  cursor: not-allowed;
+ 
+} 
+
+.selected-dates {
+  margin-top: 20px;
+}
