@@ -22,8 +22,6 @@ import lombok.*;
 @ToString  
 @Entity
 public class Users implements UserDetails {
-	
-	
 	@Id
 	@GeneratedValue
 	private int id;

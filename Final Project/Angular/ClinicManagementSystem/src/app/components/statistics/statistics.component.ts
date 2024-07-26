@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StatsService } from '../../services/stats.service';
+import {Chart,registerables} from '../../../../node_modules/chart.js'
+import { app } from '../../../../server';
 
+Chart.register(...registerables)
 @Component({
   selector: 'app-statistics',
   standalone: true,
@@ -16,6 +19,8 @@ export class StatisticsComponent {
   bookings: any;
   staff: any;
   allBookings: any;
+
+  lineGraph :any[] | undefined;
 
   // Data for the bar chart
   doctorNames: string[] = [];
@@ -66,12 +71,31 @@ export class StatisticsComponent {
       (resp: any) => {
         this.allBookings = resp;
         console.log('All bookings', this.allBookings);
-        this.processBookings();
+        const dates= this.getCurrentWeekDates();
+        console.log('dddddddddd',dates)
+    
+        this.stats.linegraph1(dates).subscribe(
+          (resp:any)=>{
+            console.log("line graph", resp)
+            this.lineGraph=resp
+            this.processBookings();
+
+        this.renderChart();
+            
+          },err=>{
+            console.log(err)
+          }
+        )
+        
+
+        console.log('dsssdsdsdsdsds',this.doctorNames,this.appointmentCounts)
       },
       err => {
         console.log(err);
       }
     );
+
+   
   }
 
   processBookings() {
@@ -88,5 +112,111 @@ export class StatisticsComponent {
 
     this.doctorNames = Object.keys(doctorAppointments);
     this.appointmentCounts = Object.values(doctorAppointments);
+  }
+
+  ngOnInit(): void {
+
+    
+    
+    
+  }
+
+  getCurrentWeekDates() {
+    const weekDates: string[] = [];
+    
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // Sunday is 0, Monday is 1, ..., Saturday is 6
+    
+    // Calculate the start of the week (Sunday)
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - dayOfWeek);
+    startOfWeek.setHours(0, 0, 0, 0);
+    
+    // Generate dates for the entire week (Sunday to Saturday)
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(startOfWeek);
+      date.setDate(startOfWeek.getDate() + i);
+      weekDates.push(this.formatDateToSQL(date));
+    }
+    // console.log(weekDates)
+    return weekDates;
+    
+    
+  }
+
+  private formatDateToSQL(date: Date): string {
+    // Format date to 'YYYY-MM-DD' for SQL
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  renderChart(){
+
+    console.log('herooooo',this.doctorNames,this.appointmentCounts)
+
+    const gg = this.lineGraph
+
+   
+    new Chart("barchart", {
+      type: 'bar',
+      data: {
+        labels: this.doctorNames,
+        datasets: [{
+          label: 'no of patients consulted',
+          data: this.appointmentCounts,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    new Chart("doughnutchart", {
+      type: 'pie',
+      data: {
+        labels: this.doctorNames,
+        datasets: [{
+          label: 'no of patients consulted',
+          data: this.appointmentCounts,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
+    new Chart("linechart", {
+      type: 'line',
+      data: {
+        labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday'],
+        datasets: [{
+          label: 'no of Bookings',
+          data: gg,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
   }
 }

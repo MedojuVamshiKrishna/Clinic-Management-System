@@ -1,21 +1,22 @@
-@if (slotsnotselected === true) {
+<!-- @if (slotsnotselected === true) {
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <p><strong> No slot Selected </strong>please try to select one slot!! </p>
+    <p><strong>No slot Selected</strong> Please try to select one slot!!</p>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-}
+} -->
 @if (paymentfailed === true) {
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <p><strong> Payment failed!!! </strong>Cannot book your slot </p>
+    <p><strong>Payment failed!!!</strong> Cannot book your slot</p>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 }
 
+
 <div class="container mt-4">
   <div class="row mb-3 text-center">
     <div class="col">
-      <button class="btn btn-primary me-2" (click)="previousWeek()">Previous Week</button>
-      <button class="btn btn-primary" (click)="nextWeek()">Next Week</button>
+      <button class="btn btn-primary me-2 week-nav-btn" (click)="previousWeek()">Previous Week</button>
+      <button class="btn btn-primary week-nav-btn" (click)="nextWeek()">Next Week</button>
     </div>
   </div>
   <div class="row">
@@ -37,8 +38,9 @@
                   [checked]="bookings[formatDate(day)][timeSlot]"
                   [disabled]="bookings[formatDate(day)][timeSlot] === 'booked' || isPastDate(day)"
                   (change)="toggleBooking(formatDate(day), timeSlot)"
+                  
                 />
-                <span *ngIf="bookings[formatDate(day)][timeSlot] === 'booked'" class="text-danger">Booked</span>
+                <span *ngIf="bookings[formatDate(day)][timeSlot] === 'booked'" class="booked-slot">Booked</span>
               </ng-container>
               <ng-template #unavailable>
                 {{ bookings[formatDate(day)][timeSlot] }}
@@ -51,7 +53,42 @@
   </div>
   <div class="row">
     <div class="col text-center">
-      <button class="btn btn-success" (click)="payandsubmitBookings()">Pay Now!!</button>
+      <button class="btn btn-secondary" (click)="payandsubmitBookings()" disabled>Pay Now!!</button>
+      @if (slotsnotselected === false) {
+        <button class="btn btn-sm btn-success " data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book Now!!</button>
+      }
+      @if (slotsnotselected === true) {
+        <button class="btn btn-sm btn-success  " data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled>Book Now!!</button>
+      }
+     
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Select the payment type</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                <div class="card-body">
+                  <select [(ngModel)]="patientsBooking.paymentType" name="paymentType"class="form-select" aria-label="Default select example">
+                    <option selected>Choose the type of payment</option>
+                    <option >Card</option>
+                    <option >Cash</option>
+                    <option >UPI</option>
+                  </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="onProceed()" >Proceed</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+

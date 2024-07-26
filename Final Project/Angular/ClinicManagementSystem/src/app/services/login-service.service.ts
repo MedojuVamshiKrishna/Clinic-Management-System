@@ -56,4 +56,20 @@ export class LoginServiceService {
   {
     return localStorage.getItem("name")
   }
+  public isValidUSer(role:any){
+    let isMatch=false
+    let actualRole = this.getRole();
+    if(actualRole!=null && actualRole){
+        for (let j = 0; j < role.length; j++) {
+          if (role[j]=== actualRole) {
+            isMatch=true;
+            return isMatch
+          }
+          else{
+           return isMatch;
+          }
+        }
+      }
+    return isMatch;
+  }
 }

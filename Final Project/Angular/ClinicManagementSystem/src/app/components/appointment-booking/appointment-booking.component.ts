@@ -71,6 +71,14 @@ export class AppointmentBookingComponent {
   
     return age;
   }
+  selectedDoctor: any = null;
+  selectedDoctorEmail: any;
+  selectedDoctorName:any
+  onDoctorChange(selectedDoctor: any): void {
+    this.selectedDoctorEmail = selectedDoctor ? selectedDoctor.email : null;
+    this.selectedDoctorName = selectedDoctor? selectedDoctor.name+'-'+selectedDoctor.specialisation : null;
+    console.log('Selected Doctor Email:', this.selectedDoctorEmail);
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -92,8 +100,8 @@ export class AppointmentBookingComponent {
     this.formData2.phone=this.patient.phone;
 
     this.formData2.bp=this.formData.bp;
-    this.formData2.doctor=this.formData.doctor;
-    this.formData2.doctorId=this.formData.doctorId;
+    this.formData2.doctor=this.selectedDoctorName;
+    this.formData2.doctorId=this.selectedDoctorEmail;
     this.formData2.spo2=this.formData.spo2;
     this.formData2.symptoms=this.formData.symptoms;
     this.formData2.temperature=this.formData.temperature;
@@ -107,6 +115,8 @@ export class AppointmentBookingComponent {
       (this.formData2.name!=null && this.formData2.age!=null && this.formData2.gender!=null &&  this.formData2.phone!=null && this.formData2.bp!=null && this.formData2.doctor!=null && this.formData2.doctorId!=null && this.formData2.spo2!=null && this.formData2.symptoms!=null && 
         this.formData2.temperature!=null && this.formData2.weight!=null)
      ){
+
+      console.log(this.formData2)
       if (this.router) { // Check if router is defined
         this.router.navigate(['/bookslot'], { queryParams: { formData2: JSON.stringify(this.formData2) } });
       } else {

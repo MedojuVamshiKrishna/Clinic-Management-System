@@ -26,5 +26,6 @@ public class patients {
 	private Date dob;
 	private String gender;
 	private long phone;
+	
 
 }

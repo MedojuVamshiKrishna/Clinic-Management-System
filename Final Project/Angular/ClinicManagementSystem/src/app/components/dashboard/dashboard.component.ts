@@ -18,6 +18,8 @@ export class DashboardComponent {
     if(this.logedin){
       this.role=this.loginserice.getRole();
       this.name=this.loginserice.getName();
+
+      console.log(loginserice.getRole())
     }
   }
 

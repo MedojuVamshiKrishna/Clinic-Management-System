@@ -13,6 +13,7 @@ import { ViewAppliedPatientsComponent } from './components/view-applied-patients
 import { PatientHealthRecordsComponent } from './components/patient-health-records/patient-health-records.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ViewPaymentsComponent } from './components/view-payments/view-payments.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 export const routes: Routes = [
 
@@ -21,6 +22,12 @@ export const routes: Routes = [
         component:HomeComponent,
         pathMatch: 'full'
     },
+    {
+        path:'forbidden',
+        component:ForbiddenComponent,
+        pathMatch: 'full'
+    },
+
     {
         path:"login",
         component:LoginComponent,
@@ -43,50 +50,50 @@ export const routes: Routes = [
         path:"book",
         component:AppointmentBookingComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['STAFF']}
 
     },{
         path:"createpatient",
         component:PatientregisterComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['STAFF']}
     },{
         path:"patients",
         component:PatientsComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['STAFF']}
     },{
         path:"docavail",
         component:SetDoctorAvailabilityComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['DOCTOR']}
     },{
         path:"bookslot",
         component:BookSlotComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['STAFF']}
     }
     ,{
         path:"appliedPatients",
         component:ViewAppliedPatientsComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['DOCTOR']}
     },{
         path:"healthrecords",
         component:PatientHealthRecordsComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['STAFF']}
     }
     ,{
         path:"stats",
         component:StatisticsComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['ADMIN']}
     }
     ,{
         path:"viewPayments",
         component:ViewPaymentsComponent,
         pathMatch: 'full',
-        canActivate:[authGuard]
+        canActivate:[authGuard],data:{roles:['ADMIN']}
     }
 ];

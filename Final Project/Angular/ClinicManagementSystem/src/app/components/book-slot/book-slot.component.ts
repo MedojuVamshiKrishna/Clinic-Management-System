@@ -20,7 +20,7 @@ export class BookSlotComponent {
   weekDays: Date[] = [];
   timeSlots: string[] = [];
   bookings: any = {};
-  slotsnotselected = false;
+  slotsnotselected = true;
   paymentfailed = false;
   patient: any;
   slots: any[] = [];
@@ -41,7 +41,8 @@ export class BookSlotComponent {
     date: "",
     time: "",
     appointed: false,
-    transactionId: ""
+    transactionId: "",
+    paymentType:""
   };
 
   constructor(private getslots: GetSlotsService, private route: ActivatedRoute, private setpatientbooking: PatientbookingService, private cdr: ChangeDetectorRef, private transactionServie: TransactionServiceService) {
@@ -94,7 +95,7 @@ export class BookSlotComponent {
 
   initializeWeekDays(startDate: Date): void {
     const startOfWeek = new Date(startDate);
-    startOfWeek.setDate(startDate.getDate() - startDate.getDay() + 1); // Monday as start of week
+    startOfWeek.setDate(startDate.getDate() - startDate.getDay() + 1); 
     this.weekDays = [];
     for (let i = 0; i < 7; i++) {
       const day = new Date(startOfWeek);
@@ -153,20 +154,25 @@ export class BookSlotComponent {
 
   toggleBooking(day: string, time: string): void {
     if (this.bookings[day][time] === 'booked' || this.isPastDate(new Date(day))) return;
-
+  
     if (this.bookings[day][time]) {
+      // Uncheck the checkbox
       this.bookings[day][time] = false;
       this.selectedSlot = null;
+      this.slotsnotselected = true; // Set to true when unchecked
     } else {
+      // Check the checkbox
       if (this.selectedSlot) {
         this.bookings[this.selectedSlot.day][this.selectedSlot.time] = false;
       }
       this.selectedSlot = { day, time };
       this.bookings[day][time] = true;
+      this.slotsnotselected = false;
     }
+    
     this.cdr.detectChanges(); // Manually trigger change detection
   }
-
+  
   convertToSqlTime(time: string): string {
     const [hours, minutes] = time.split(':');
     const sqlTime = `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`;
@@ -258,5 +264,81 @@ export class BookSlotComponent {
         console.log(err)
       }
     )
+    location.reload()
+  }
+
+  onProceed(){
+
+    const bookedSlots = [];
+    for (const day in this.bookings) {
+      for (const time in this.bookings[day]) {
+        if (this.bookings[day][time] === true) {
+          bookedSlots.push({ date: day, time });
+        }
+      }
+    }
+    console.log('Booked Slots:', bookedSlots);
+
+    if (bookedSlots.length > 0) {
+      alert(JSON.stringify(bookedSlots, null, 2));
+      this.patientsBooking.age = this.patient.age;
+      this.patientsBooking.bp = this.patient.bp;
+      this.patientsBooking.date = bookedSlots[0].date;
+      this.patientsBooking.doctor = this.patient.doctor;
+      this.patientsBooking.doctorId = this.patient.doctorId;
+      this.patientsBooking.gender = this.patient.gender;
+      this.patientsBooking.name = this.patient.name;
+      this.patientsBooking.phone = this.patient.phone;
+      this.patientsBooking.spo2 = this.patient.spo2;
+      this.patientsBooking.symptoms = this.patient.symptoms;
+      this.patientsBooking.temperature = this.patient.temperature;
+      const time = bookedSlots[0].time;
+      const sqlTime = this.convertToSqlTime(time);
+      this.patientsBooking.time = sqlTime;
+      this.patientsBooking.weight = this.patient.weight;
+
+      
+
+      let temp ='_PAY'
+      const dateString = this.patientsBooking.date;
+      const timeString = this.patientsBooking.time;
+      
+
+      const[hours,seconds,mseconds]=timeString.split(':');
+      const [year, month, day] = dateString.split('-');
+
+
+      const yearLastTwoDigits = year.slice(-2);
+
+
+      const monthTwoDigits = month;
+
+
+      const dayTwoDigits = day;
+
+      const hourDigits = hours;
+
+      temp=temp+yearLastTwoDigits+monthTwoDigits+dayTwoDigits+hourDigits;
+
+      console.log('transactional id: ',temp)
+      this.patientsBooking.transactionId=temp
+
+      console.log(this.patientsBooking)
+
+      this.setpatientbooking.createbooking(this.patientsBooking).subscribe(
+        (resp: any) => {
+          console.log('patientsBooking data inserted into database successfully', resp)
+        }, err => {
+          console.log(err)
+        }
+      )
+      location.reload()
+
+
+
+
+
+    }
+
   }
 }

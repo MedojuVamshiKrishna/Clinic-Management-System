@@ -34,5 +34,6 @@ public class PatientsBooking {
 	private Time time;
 	private boolean appointed;
 	private String transactionId;
+	private String paymentType;
 
 }

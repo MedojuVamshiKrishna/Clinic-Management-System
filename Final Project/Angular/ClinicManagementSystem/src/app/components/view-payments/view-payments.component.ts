@@ -21,9 +21,9 @@ export class ViewPaymentsComponent {
       (resp:any)=>{
         this.bookings=resp
         console.log(this.bookings)
-      },err=>[
+      },err=>{
           console.log(err)
-      ]
+      }
     )
 
   }

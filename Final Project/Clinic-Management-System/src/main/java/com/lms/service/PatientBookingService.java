@@ -1,5 +1,7 @@
 package com.lms.service;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import com.lms.model.PatientsBooking;
 import com.lms.model.TransactionDetails;
 import com.lms.model.patients;
 import com.lms.repository.PatientBookingRepository;
+import com.lms.utils.DateUtils;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
@@ -110,5 +113,11 @@ public class PatientBookingService {
 		return tr;
 		
 	}
+	
+	 public long getAppointedCountsForDates(Date dates) {
+	        
+	        
+	        return bookingRepo.countAppointedForDate(dates);
+	    }
 
 }

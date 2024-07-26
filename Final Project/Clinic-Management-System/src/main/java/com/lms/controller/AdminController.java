@@ -1,5 +1,7 @@
 package com.lms.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,6 +56,17 @@ public class AdminController {
 	public List<PatientsBooking> getAllBookings(){
 		return bookingService.getPatientBookings();
 	}
+	
+	@PostMapping("/appointments/counts")
+    public List<Long> getAppointedCountsForDates(@RequestBody List<Date> dates) {
+    	List<Long> t = new ArrayList<>();
+    	
+    	for(Date date : dates) {
+    		t.add(bookingService.getAppointedCountsForDates(date));
+    	}
+    	
+        return t;
+    }
 	
 	
 	

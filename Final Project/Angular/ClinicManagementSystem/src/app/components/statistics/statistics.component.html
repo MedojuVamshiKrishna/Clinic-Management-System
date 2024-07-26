@@ -46,32 +46,50 @@
       </div>
     </div>
 
-    <div class="bar-chart mt-5">
-      <h2>Appointment Statistics</h2>
-      <div class="bar-chart-container">
-        <div class="y-axis">
-          <div class="y-label" id="y-label">Number of Patients</div>
-          <!-- <div class="y-ticks">
-            <div *ngFor="let tick of [5, 4, 3, 2, 1, 0]" class="y-tick">{{tick}}</div>
-          </div> -->
+     <div class="bar-chart mt-5">
+      
+      <div class="display-1">
+        <h4 style="text-align: center;">Doctors Consulting Stats!!</h4>
+      </div>
+      <div class="d-flex">
+
+        <div class="chart-container2 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+          <canvas id="doughnutchart" style="height: 200px;" ></canvas>
         </div>
-        <div class="bars">
-          <div *ngFor="let doctor of doctorNames; let i = index" class="bar">
-            <div class="bar-inner" [style.height]="appointmentCounts[i] * 20 + 'px'">
-              <span class="bar-count">{{appointmentCounts[i]}}</span>
-            </div>
-            <div class="bar-label">{{doctor}}</div>
-          </div>
+        <div class="chart-container1 mx-xxl-5 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+          <canvas id="barchart"></canvas>
         </div>
        
       </div>
-      <div class="x-axis mt-3">
-        <div class="x-label">Doctor Names</div>
+
+      <div class="display-1">
+        <h4 style="text-align: center;">This Week Booking Stats!!</h4>
       </div>
+      <div class="d-flex">
+        <div class="linegraph shadow-sm p-3 mb-5 bg-body-tertiary rounded" style="width: 50%; align-content: center;">
+          <canvas id="linechart"></canvas>
+        </div>
+      </div>
+      
+
+       
+
+
+
+       
+        
+       
+      
+      
      
-    </div>
+    </div> 
+    
    
-  </div>
+  </div> 
+
+  
+
+
   
 </div>
 
