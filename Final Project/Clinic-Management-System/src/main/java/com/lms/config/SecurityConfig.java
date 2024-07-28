@@ -48,6 +48,7 @@ public class SecurityConfig {
 	               .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
 	               .requestMatchers("/doctors/**").hasAnyAuthority("DOCTOR")
 	               .requestMatchers("/staff/**").hasAnyAuthority("STAFF")
+	               .requestMatchers("/mail/**").hasAnyAuthority("STAFF")
 	               .anyRequest().authenticated())
 //	               .exceptionHandling(ex-> ex.authenticationEntryPoint(point))
 	               .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

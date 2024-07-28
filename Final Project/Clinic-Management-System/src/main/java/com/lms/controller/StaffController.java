@@ -22,6 +22,7 @@ import com.lms.service.patientService;
 @CrossOrigin
 @RequestMapping("/staff")
 public class StaffController {
+	
 	@Autowired
 	private patientService patientservice;
 	@Autowired
@@ -85,9 +86,13 @@ public class StaffController {
 	
 	@GetMapping("/createTransaction/{amount}")
 	public TransactionDetails createTranstaction(@PathVariable(name ="amount") Double amount) throws Exception {
-		
 		return bookingService.createTransaction(amount);
-		
+	}
+	
+	@DeleteMapping("/deleteRecord")
+	public String DeleteHealthRecord(@RequestParam int id) {
+		bookingService.deleteHealthRecord(id);
+		return "record deleted successfully";
 	}
 	
 	

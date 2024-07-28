@@ -194,5 +194,7 @@ export class SetDoctorAvailabilityComponent {
         console.log(err);
       }
     );
+
+    location.reload()
   }
 }

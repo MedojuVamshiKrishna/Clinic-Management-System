@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientbookingService } from '../../services/patientbooking.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { TransactionServiceService } from '../../services/transaction-service.service';
+import { MailServiceService } from '../../services/mail-service.service';
 
 declare var Razorpay: any;
 
@@ -17,6 +18,8 @@ declare var Razorpay: any;
   styleUrls: ['./book-slot.component.css']
 })
 export class BookSlotComponent {
+  
+  upiDone=false
   weekDays: Date[] = [];
   timeSlots: string[] = [];
   bookings: any = {};
@@ -44,8 +47,13 @@ export class BookSlotComponent {
     transactionId: "",
     paymentType:""
   };
+  mailStructure={
+    subject:"Jatayu hospitals, Slot booking Update",
+    message:""
 
-  constructor(private getslots: GetSlotsService, private route: ActivatedRoute, private setpatientbooking: PatientbookingService, private cdr: ChangeDetectorRef, private transactionServie: TransactionServiceService) {
+  }
+
+  constructor(private getslots: GetSlotsService, private route: ActivatedRoute, private setpatientbooking: PatientbookingService, private cdr: ChangeDetectorRef, private transactionServie: TransactionServiceService, private mailservice: MailServiceService) {
     this.route.queryParams.subscribe(params => {
       const patientJson = params['formData2'];
       if (patientJson) {
@@ -149,6 +157,7 @@ export class BookSlotComponent {
 
   isPastDate(date: Date): boolean {
     const today = new Date();
+    today.setDate(today.getDate() - 1);
     return date < today;
   }
 
@@ -267,6 +276,18 @@ export class BookSlotComponent {
     location.reload()
   }
 
+
+
+  togglePaymentType(type: string): void {
+    // console.log(type)
+    if (this.patientsBooking.paymentType === type) {
+      this.patientsBooking.paymentType = '';
+    } else {
+      this.patientsBooking.paymentType = type;
+    }
+    console.log(this.patientsBooking.paymentType)
+  }
+
   onProceed(){
 
     const bookedSlots = [];
@@ -280,7 +301,9 @@ export class BookSlotComponent {
     console.log('Booked Slots:', bookedSlots);
 
     if (bookedSlots.length > 0) {
-      alert(JSON.stringify(bookedSlots, null, 2));
+      // alert(JSON.stringify(bookedSlots, null, 2));
+      
+
       this.patientsBooking.age = this.patient.age;
       this.patientsBooking.bp = this.patient.bp;
       this.patientsBooking.date = bookedSlots[0].date;
@@ -325,6 +348,28 @@ export class BookSlotComponent {
 
       console.log(this.patientsBooking)
 
+      this.mailStructure.message = `Thanks for booking your slot in Jatayu Hospitals
+      Here is your Slot info
+      Your name: ${this.patientsBooking.name}
+      Date: ${this.patientsBooking.date}
+      Time: ${this.patientsBooking.time}
+      Doctor Consulted: ${this.patientsBooking.doctor}
+      
+      Have a speedy recovery
+      
+      
+      
+      Regards
+      Jatayu Hospitals`
+      console.log(this.mailStructure)
+      this.mailservice.sendMail("mvamshikrishna17@gmail.com",this.mailStructure).subscribe(
+        (resp:any)=>{
+          console.log(resp)
+        },err=>{
+          console.log(err)
+        }
+      )
+
       this.setpatientbooking.createbooking(this.patientsBooking).subscribe(
         (resp: any) => {
           console.log('patientsBooking data inserted into database successfully', resp)
@@ -339,6 +384,8 @@ export class BookSlotComponent {
 
 
     }
+    
 
   }
+  
 }

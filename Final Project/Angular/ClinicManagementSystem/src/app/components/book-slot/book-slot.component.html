@@ -65,29 +65,52 @@
   </div>
 
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Select the payment type</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-                <div class="card-body">
-                  <select [(ngModel)]="patientsBooking.paymentType" name="paymentType"class="form-select" aria-label="Default select example">
-                    <option selected>Choose the type of payment</option>
-                    <option >Card</option>
-                    <option >Cash</option>
-                    <option >UPI</option>
-                  </select>
+          <div class="card-body">
+            <div class="card payment-card" [class.selected]="patientsBooking.paymentType === 'Card'" (click)="togglePaymentType('Card')">
+              <div class="card-body">
+                Card
+                <i *ngIf="patientsBooking.paymentType === 'Card'" class="bi bi-check-circle selected-icon"></i>
+              </div>
+            </div>
+            <div class="card payment-card" [class.selected]="patientsBooking.paymentType === 'Cash'" (click)="togglePaymentType('Cash')">
+              <div class="card-body">
+                Cash
+                <i *ngIf="patientsBooking.paymentType === 'Cash'" class="bi bi-check-circle selected-icon"></i>
+              </div>
+            </div>
+            <div class="card payment-card" [class.selected]="patientsBooking.paymentType === 'UPI'" (click)="togglePaymentType('UPI')">
+              <div class="card-body">
+                UPI
+                <i *ngIf="patientsBooking.paymentType === 'UPI'" class="bi bi-check-circle selected-icon"></i>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="onProceed()" >Proceed</button>
+
+          @if (patientsBooking.paymentType==='') {
+            <button type="button" class="btn btn-primary" (click)="onProceed()" disabled>Payment Done!</button>
+
+          }
+          @if (patientsBooking.paymentType!=='') {
+            <button type="button" class="btn btn-primary" (click)="onProceed()">Payment Done!</button>
+          }
+          
+          
         </div>
       </div>
     </div>
   </div>
+  
+  
 </div>
 
 

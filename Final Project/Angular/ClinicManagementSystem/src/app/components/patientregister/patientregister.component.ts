@@ -1,67 +1,69 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ViewpatientsService } from '../../services/viewpatients.service';
 import { CreatepatientService } from '../../services/createpatient.service';
 
 @Component({
   selector: 'app-patientregister',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './patientregister.component.html',
-  styleUrl: './patientregister.component.css'
+  styleUrls: ['./patientregister.component.css']
 })
 export class PatientregisterComponent {
 
-  patient={
-    name:'',
-    dob:'',
-    gender:'',
-    phone:''
+  patientForm: FormGroup;
+  exists = false;
+  create = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private patientservice: ViewpatientsService,
+    private createPatient: CreatepatientService
+  ) {
+    this.patientForm = this.fb.group({
+      name: ['', Validators.required],
+      dob: ['', Validators.required],
+      gender: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
+    });
   }
-  exists=false
-  create =false
 
-  constructor(private patientservice : ViewpatientsService, private createPatient: CreatepatientService){
+  onSubmit() {
+    if (this.patientForm.valid) {
+      const patientData = this.patientForm.value;
+      console.log('Form is valid, submitting data:', patientData);
 
-  }
+      this.patientservice.getPatientByPhone(patientData.phone).subscribe(
+        (resp: any) => {
+          if (resp === null) {
+            console.log('Patient does not exist, proceeding to create');
 
-
-  onSubmit(){
-
-    if ((this.patient.name!='' && this.patient.dob!='' && this.patient.gender!='' && this.patient.phone!='') &&(this.patient.name!=null && this.patient.dob!=null && this.patient.gender!=null && this.patient.phone!=null)) {
-
-      console.log('can be submitted', this.patient)
-
-      this.patientservice.getPatientByPhone(this.patient.phone).subscribe(
-        (resp:any)=>{
-          if (resp===null) {
-            console.log('can be proceeded')
-
-            this.createPatient.createPatient(this.patient).subscribe(
-              (resp:any)=>{
-                console.log(this.patient,'inserted to database')
-              },err=>{
-                console.log(err)
+            this.createPatient.createPatient(patientData).subscribe(
+              (resp: any) => {
+                console.log('Patient inserted into database:', patientData);
+                this.create = true;
+              }, err => {
+                console.log('Error inserting patient:', err);
               }
-            )
-            this.create=true
-            
-          }else{
-            this.exists=true
-            console.log('allready exists')
+            );
+          } else {
+            this.exists = true;
+            console.log('Patient already exists');
           }
-
+        },
+        err => {
+          console.log('Error fetching patient by phone:', err);
         }
-      )
-      
-    }
-    else{
-      console.log('null values')
+      );
+    } else {
+      console.log('Form is invalid');
     }
   }
 
-
-
-
+  get name() { return this.patientForm.get('name'); }
+  get dob() { return this.patientForm.get('dob'); }
+  get gender() { return this.patientForm.get('gender'); }
+  get phone() { return this.patientForm.get('phone'); }
 }

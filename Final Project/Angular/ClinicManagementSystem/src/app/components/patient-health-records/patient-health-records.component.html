@@ -1,43 +1,56 @@
-<table class="table mx-3 shadow p-3 mb-5 bg-body-tertiary rounded " >
-    <thead>
-      <tr>
-        <th scope="col">S.no</th>
-        <th scope="col">Name</th>
-        <th scope="col">Age</th>
-        <th scope="col">Weight</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Symptoms</th>
-        <th scope="col">Slot detailes</th>
-        <th scope="col">Appointment Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of patient; let i =index">
-        <th scope="row">{{i+1}}</th>
-        <td>{{item.name}}</td>
-        <td>{{item.age}}</td>
-        <td>{{item.weight}}</td>
-        
-        <td>{{item.phone}}</td>
-        <td>{{item.symptoms}}</td>
-        <td>{{item.date}} - {{item.time}}</td>
-        
-        <td>
-            @if (item.appointed===true) {
+<table class="table mx-3 shadow p-3 mb-5 bg-body-tertiary rounded ">
+  <thead>
+    <tr>
+      <th scope="col">S.no</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Symptoms</th>
+      <th scope="col">Slot detailes</th>
+      <th scope="col">Appointment Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of patient; let i =index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.age}}</td>
+      <td>{{item.weight}}</td>
 
-                <span class="badge text-bg-success">Consulted</span>
-            }
-            @if (item.appointed===false && item.date<formattedDate) {
-                <span class="badge text-bg-danger">Absent</span>
-            }
-            @if (item.appointed===false && item.date>=formattedDate) {
-                <span class="badge text-bg-info">In Process</span>
-            }
+      <td>{{item.phone}}</td>
+      <td>{{item.symptoms}}</td>
+      <td>{{item.date}} - {{item.time}}</td>
+
+      <td>
+        @if (item.appointed===true) {
+
+        <span class="badge text-bg-success">Consulted</span>
+        }
+        @if (item.appointed===false && item.date<formattedDate) { <span class="badge text-bg-danger">Absent</span>
+          }
+          @if (item.appointed===false && item.date>=formattedDate) {
+          <span class="badge text-bg-info">In Process</span>
+          }
 
 
-        </td>
-      </tr>
-     
-    </tbody>
-  </table>
+      </td>
 
+      <td>
+        @if (item.appointed===false && item.date>=formattedDate) {
+        <button type="button" class="btn btn-outline-secondary btn-sm mx-2">Re-Schedule booking</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRecord(item.id)" >Cancel Booking</button>
+        }
+        @if (item.appointed===true) {
+
+        <p style="padding: 0px 10%;"> --</p>
+        }
+        @if (item.appointed===false && item.date<formattedDate) { <p style="padding: 0px 10%;">--</p>
+          }
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>

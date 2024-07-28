@@ -118,3 +118,25 @@ input[type="checkbox"] {
 .week-nav-btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(130,138,145,0.5);
 }
+.payment-card {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 20px;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.payment-card.selected {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.selected-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #007bff;
+}
